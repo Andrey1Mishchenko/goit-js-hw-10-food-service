@@ -21,12 +21,15 @@ function createMenuItemsMarkup(items) {
 const bodyEl = document.querySelector('body');
 const themeSwitchToggle = document.querySelector('#theme-switch-toggle');
 
-themeSwitchToggle.addEventListener('change', changeThemeSwitchHandler);
-
 if (localStorage.getItem('checked') === 'true') {
   themeSwitchToggle.checked = true;
   bodyEl.classList.add(Theme.DARK);
+} else {
+  themeSwitchToggle.checked = false;
+  bodyEl.classList.add(Theme.LIGHT);
 }
+
+themeSwitchToggle.addEventListener('change', changeThemeSwitchHandler);
 
 function changeThemeSwitchHandler(evt) {
   localStorage.setItem('checked', evt.target.checked);
