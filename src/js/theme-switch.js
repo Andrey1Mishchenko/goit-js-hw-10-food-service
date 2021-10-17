@@ -15,13 +15,28 @@ menuEl.insertAdjacentHTML('beforeend', itemsMarkup);
 function createMenuItemsMarkup(items) {
   return menuItemTpl(items);
 }
-// рендеринг разметки єэлементов меню
+// рендеринг разметки элементов меню
 
 // переключение темы. localStorage
 const bodyEl = document.querySelector('body');
 const themeSwitchToggle = document.querySelector('#theme-switch-toggle');
+
 themeSwitchToggle.addEventListener('change', changeThemeSwitchHandler);
+
+if (localStorage.getItem('checked') === 'true') {
+  themeSwitchToggle.checked = true;
+  bodyEl.classList.add(Theme.DARK);
+}
+
 function changeThemeSwitchHandler(evt) {
-  bodyEl.classList.toggle(Theme.DARK);
+  localStorage.setItem('checked', evt.target.checked);
+
+  if (evt.target.checked) {
+    bodyEl.classList.add(Theme.DARK);
+    bodyEl.classList.remove(Theme.LIGHT);
+  } else {
+    bodyEl.classList.add(Theme.LIGHT);
+    bodyEl.classList.remove(Theme.DARK);
+  }
 }
 // переключение темы. localStorage
